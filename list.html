@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To Do List</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <header>My To Do List</header>
+    <nav>
+        <ul>
+            <li><a href="#genres">Genres</a></li>
+            <li><a href="artist.html">Artists</a></li>
+            <li><a href="instruments.html">Instruments</a></li>
+            <li><a href="list.html">To-Do List</a></li>
+        </ul>
+    </nav> 
+    <div class="input-container">
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button onclick="addTask()">Add</button>
+    </div>
+    <div class="task-list" id="taskList"></div>
+    <div class="done-container">
+        <button onclick="finishTasks()">Done</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
