@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #4CAF50;
     --secondary-color: #ff5722;
@@ -11,13 +10,13 @@
     --secondary-font: 'Open Sans', sans-serif;
 }
 
-
 body {
     font-family: var(--secondary-font);
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
+    animation: fadeIn 1s ease-in;
 }
 
 header, footer {
@@ -25,6 +24,7 @@ header, footer {
     color: white;
     text-align: center;
     padding: 1rem 0;
+    animation: slideIn 1s ease-in-out;
 }
 
 nav ul {
@@ -34,6 +34,7 @@ nav ul {
     display: flex;
     justify-content: center;
     background-color: var(--accent-color);
+    animation: fadeIn 2s ease-in;
 }
 
 nav ul li {
@@ -46,11 +47,28 @@ nav ul li a {
     padding: 1rem;
     display: block;
     transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
 }
 
 nav ul li a:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 section {
@@ -65,8 +83,8 @@ h1, h2 {
 
 h1:hover, h2:hover {
     transform: scale(1.05);
+    color: var(--accent-color);
 }
-
 
 #genres, #artists, #instruments {
     display: flex;
@@ -82,6 +100,7 @@ article {
     flex: 1 1 calc(33% - 1rem);
     box-sizing: border-box;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: zoomIn 0.5s ease;
 }
 
 article:hover {
@@ -95,7 +114,6 @@ article img {
     height: auto;
 }
 
-
 #artists {
     padding: 2rem;
     background-color: #f9f9f9; 
@@ -108,6 +126,7 @@ article img {
     color: var(--accent-color); 
     text-align: center; 
     margin-bottom: 1rem; 
+    animation: slideIn 1s ease-in-out;
 }
 
 #artists img {
@@ -117,6 +136,12 @@ article img {
     border-radius: 8px; 
     margin: 0 auto 1rem; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#artists img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #artists p {
@@ -126,8 +151,8 @@ article img {
     margin: 0 auto; 
     max-width: 600px; 
     line-height: 1.6; 
+    animation: fadeIn 1s ease-in;
 }
-
 
 button {
     background-color: var(--primary-color);
@@ -136,6 +161,7 @@ button {
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: zoomIn 0.5s ease;
 }
 
 button:hover {
@@ -143,10 +169,10 @@ button:hover {
     transform: scale(1.05);
 }
 
-
 form {
     display: flex;
     flex-direction: column;
+    animation: fadeIn 1s ease-in;
 }
 
 label {
@@ -158,16 +184,37 @@ input, textarea {
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 204, 0, 0.5);
 }
 
 textarea {
     resize: vertical;
 }
 
+@media (max-width: 1024px) {
+    #genres, #artists, #instruments {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    article {
+        flex: 1 1 calc(50% - 1rem);
+        margin-bottom: 2rem;
+    }
+}
 
 @media (max-width: 768px) {
     article {
         flex: 1 1 calc(50% - 1rem);
+    }
+
+    #artists {
+        padding: 1rem;
     }
 }
 
@@ -175,4 +222,78 @@ textarea {
     article {
         flex: 1 1 100%;
     }
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0; /* Initial opacity for fade-in effect */
+    animation: fadeIn 1s forwards; /* Entrance animation */
+}
+
+.loader img {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    animation: spin 2s linear infinite; /* Spinning animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader.fade-out {
+    animation: fadeOut 1s forwards;
 }
