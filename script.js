@@ -30,7 +30,8 @@ function addTask() {
         taskItem.innerText = `${taskList.children.length + 1}. ${taskText}`;
         taskList.appendChild(taskItem);
         taskInput.value = '';
-        taskInput.focus(); }
+        taskInput.focus(); 
+    }
 }
 
 function finishTasks() {

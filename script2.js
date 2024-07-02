@@ -1,15 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const loader = document.querySelector('.loader');
-    loader.classList.add('fade-out');
-    setTimeout(() => {
-        loader.style.display = 'none';
-
-        const hash = window.location.hash;
-        if (hash) {
-            const targetElement = document.querySelector(hash);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    }, 1000);
+    const loader = document.querySelector(".loader");
+    window.addEventListener("load", function() {
+        loader.classList.add("fade-out");
+        setTimeout(() => loader.style.display = "none", 1000); 
+    });
 });
